@@ -603,75 +603,75 @@
       let currentAudioCtx = null;
       let currentMood = null;
 
-     function showMood(mood) {
-  currentMood = mood;
-  const data = moods[mood];
+      function showMood(mood) {
+        currentMood = mood;
 
-  // Update theme
-  document.body.className = data.theme;
+        const data = moods[mood];
 
-  // Update active button
-  document
-    .querySelectorAll(".mood-btn")
-    .forEach((b) => b.classList.remove("active"));
+        // Update theme
+        document.body.className = data.theme;
 
-  document
-    .getElementById("btn-" + mood)
-    .classList.add("active");
+        // Update active button
+        document
+          .querySelectorAll(".mood-btn")
+          .forEach((b) => b.classList.remove("active"));
 
-  // Update mood bar
-  document.getElementById("moodText").textContent =
-    data.moodText;
+        document.getElementById("btn-" + mood).classList.add("active");
 
-  document.getElementById("moodBar").classList.add("show");
+        // Update mood bar
+        document.getElementById("moodText").textContent = data.moodText;
 
-  // Update response
-  document.getElementById("responseEmoji").textContent =
-    data.emoji;
+        document.getElementById("moodBar").classList.add("show");
 
-  document.getElementById("responseMsg").textContent =
-    data.msg;
+        // Update response
+        document.getElementById("responseEmoji").textContent = data.emoji;
 
-  document.getElementById("memeText").textContent =
-    data.meme;
+        document.getElementById("responseMsg").textContent = data.msg;
 
-  document.getElementById("heartExplosion").textContent =
-    data.hearts;
+        document.getElementById("memeText").textContent = data.meme;
 
-  // Show card
-  const card = document.getElementById("responseCard");
+        document.getElementById("heartExplosion").textContent = data.hearts;
 
-  card.classList.remove("show");
+        // Show card
+        const card = document.getElementById("responseCard");
 
-  void card.offsetWidth;
+        card.classList.remove("show");
 
-  card.classList.add("show");
+        void card.offsetWidth;
 
-  // Spawn confetti
-  spawnConfetti(data.confetti);
+        card.classList.add("show");
 
-  // TELEGRAM NOTIFICATION
-  fetch(`https://api.telegram.org/bot8669318903:AAHyI-n5yk2iUjYcxFKzMVh0t6n_JMZCBao/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      chat_id: "5282881723",
-      text: `💖 Vanessa lagi ${data.moodText}
+        // Spawn confetti
+        spawnConfetti(data.confetti);
+
+        // TELEGRAM NOTIFICATION
+        fetch(
+          `https://api.telegram.org/bot8669318903:AAHyI-n5yk2iUjYcxFKzMVh0t6n_JMZCBao/sendMessage`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              chat_id: "5282881723",
+
+              text: `💖 Vanessa memilih mood: ${data.moodText}
+
 🕒 ${new Date().toLocaleString("id-ID")}`,
-    }),
-  });
+            }),
+          },
+        );
 
-  // Scroll to card
-  setTimeout(() => {
-    card.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-  }, 200);
-}
-
+        // Scroll to card
+        setTimeout(() => {
+          card.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }, 200);
+      }
       // Floating hearts background
       function initHearts() {
         const bg = document.getElementById("heartsBg");
@@ -688,7 +688,6 @@
           bg.appendChild(h);
         }
       }
-   
 
       initHearts();
     </script>
