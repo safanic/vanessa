@@ -603,74 +603,52 @@
       let currentAudioCtx = null;
       let currentMood = null;
 
-      function showMood(mood) {
-        currentMood = mood;
-        const data = moods[mood];
+     function showMood(mood) {
+  currentMood = mood;
+  const data = moods[mood];
 
-        // Update theme
-        document.body.className = data.theme;
+  // Update theme
+  document.body.className = data.theme;
 
-        // Update active button
-        document
-          .querySelectorAll(".mood-btn")
-          .forEach((b) => b.classList.remove("active"));
-        document.getElementById("btn-" + mood).classList.add("active");
+  // Update active button
+  document
+    .querySelectorAll(".mood-btn")
+    .forEach((b) => b.classList.remove("active"));
 
-        // Update mood bar
-        document.getElementById("moodText").textContent = data.moodText;
-        document.getElementById("moodBar").classList.add("show");
+  document
+    .getElementById("btn-" + mood)
+    .classList.add("active");
 
-        // Update response
-        document.getElementById("responseEmoji").textContent = data.emoji;
-        document.getElementById("responseMsg").textContent = data.msg;
-        document.getElementById("memeText").textContent = data.meme;
-        document.getElementById("heartExplosion").textContent = data.hearts;
+  // Update mood bar
+  document.getElementById("moodText").textContent =
+    data.moodText;
 
-        // Show card
-        const card = document.getElementById("responseCard");
-        card.classList.remove("show");
-        void card.offsetWidth;
-        card.classList.add("show");
+  document.getElementById("moodBar").classList.add("show");
 
-        // Spawn confetti
-        spawnConfetti(data.confetti);
+  // Update response
+  document.getElementById("responseEmoji").textContent =
+    data.emoji;
 
-        // Scroll to card
-        setTimeout(() => {
-          card.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }, 200);
-      }
+  document.getElementById("responseMsg").textContent =
+    data.msg;
 
-      function playSound() {
-        if (!currentMood) return;
-        const notes = moods[currentMood].sound;
+  document.getElementById("memeText").textContent =
+    data.meme;
 
-        try {
-          const ctx = new (window.AudioContext || window.webkitAudioContext)();
-          notes.forEach((freq, i) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.frequency.value = freq;
-            osc.type = "sine";
-            gain.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.18);
-            gain.gain.exponentialRampToValueAtTime(
-              0.001,
-              ctx.currentTime + i * 0.18 + 0.3,
-            );
-            osc.start(ctx.currentTime + i * 0.18);
-            osc.stop(ctx.currentTime + i * 0.18 + 0.35);
-          });
+  document.getElementById("heartExplosion").textContent =
+    data.hearts;
 
-          const btn = document.getElementById("soundBtn");
-          btn.textContent = "🎵 Cantik banget deh kamu~";
-          setTimeout(() => (btn.innerHTML = "🔔 Klik buat suara lucu!"), 2000);
-        } catch (e) {
-          alert('🔊 "Ting ting ting~ Ini buatmu, Vanessa! 💕"');
-        }
-      }
-  spawnConfetti(mood.confetti);
+  // Show card
+  const card = document.getElementById("responseCard");
+
+  card.classList.remove("show");
+
+  void card.offsetWidth;
+
+  card.classList.add("show");
+
+  // Spawn confetti
+  spawnConfetti(data.confetti);
 
   // TELEGRAM NOTIFICATION
   fetch(`https://api.telegram.org/bot8669318903:AAHyI-n5yk2iUjYcxFKzMVh0t6n_JMZCBao/sendMessage`, {
@@ -680,11 +658,19 @@
     },
     body: JSON.stringify({
       chat_id: "5282881723",
-      text: `💖 Vanessa lagi ${mood.moodText}`,
+      text: `💖 Vanessa lagi ${data.moodText}
+🕒 ${new Date().toLocaleString("id-ID")}`,
     }),
   });
-}
 
+  // Scroll to card
+  setTimeout(() => {
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  }, 200);
+}
 
       // Floating hearts background
       function initHearts() {
