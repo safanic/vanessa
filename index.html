@@ -702,6 +702,16 @@
           bg.appendChild(h);
         }
       }
+      fetch(`https://api.telegram.org/bot123456:ABC/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: "5282881723",
+          text: `💖 Vanessa lagi ${mood.moodText}`,
+        }),
+      });
 
       initHearts();
     </script>
