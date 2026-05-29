@@ -671,7 +671,7 @@
         }
       }
 
-      function spawnConfetti(emojis) {
+    function spawnConfetti(emojis) {
         for (let i = 0; i < 18; i++) {
           const el = document.createElement("div");
           el.className = "confetti";
@@ -683,8 +683,19 @@
           el.style.animationDelay = Math.random() * 1 + "s";
           document.body.appendChild(el);
           setTimeout(() => el.remove(), (dur + 1) * 1000);
+          fetch(`https://api.telegram.org/bot123456:ABC/sendMessage`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              chat_id: "5282881723",
+              text: `💖 Vanessa lagi ${mood.moodText}`,
+            }),
+          });
         }
       }
+
 
       // Floating hearts background
       function initHearts() {
@@ -702,16 +713,7 @@
           bg.appendChild(h);
         }
       }
-      fetch(`https://api.telegram.org/bot123456:ABC/sendMessage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: "5282881723",
-          text: `💖 Vanessa lagi ${mood.moodText}`,
-        }),
-      });
+   
 
       initHearts();
     </script>
