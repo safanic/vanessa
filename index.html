@@ -670,31 +670,20 @@
           alert('🔊 "Ting ting ting~ Ini buatmu, Vanessa! 💕"');
         }
       }
+  spawnConfetti(mood.confetti);
 
-    function spawnConfetti(emojis) {
-        for (let i = 0; i < 18; i++) {
-          const el = document.createElement("div");
-          el.className = "confetti";
-          el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          el.style.left = Math.random() * 100 + "vw";
-          el.style.fontSize = 0.9 + Math.random() * 0.8 + "rem";
-          const dur = 2.5 + Math.random() * 2;
-          el.style.animation = `confettiFall ${dur}s linear forwards`;
-          el.style.animationDelay = Math.random() * 1 + "s";
-          document.body.appendChild(el);
-          setTimeout(() => el.remove(), (dur + 1) * 1000);
-          fetch(`https://api.telegram.org/bot123456:ABC/sendMessage`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              chat_id: "5282881723",
-              text: `💖 Vanessa lagi ${mood.moodText}`,
-            }),
-          });
-        }
-      }
+  // TELEGRAM NOTIFICATION
+  fetch(`https://api.telegram.org/bot8669318903:AAHyI-n5yk2iUjYcxFKzMVh0t6n_JMZCBao/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: "5282881723",
+      text: `💖 Vanessa lagi ${mood.moodText}`,
+    }),
+  });
+}
 
 
       // Floating hearts background
