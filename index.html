@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Mood Booster Vanessa 💖</title>
+<title>Vanessa Salsabila 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fff0f5;--accent:#ff6b9d;--text:#3d1c2e;--soft:#ffd6e7}
@@ -233,7 +233,7 @@ function sendTelegram(mood, em, pesan, romantis) {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({chat_id: TG_CHAT, text: text})
-  }).then(function(){ showToast("📨 Notif terkirim ke Telegram!"); }).catch(function(){ showToast("⚠️ Gagal kirim notif"); });
+  }).then(function(){ showToast("okey"); }).catch(function(){ showToast("⚠️ Gagal kirim notif"); });
 }
 
 function kirimNotif() {
